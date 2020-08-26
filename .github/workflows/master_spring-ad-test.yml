@@ -20,8 +20,8 @@ jobs:
       with:
         java-version: '11'
 
-    - name: Build with Maven
-      run: mvn clean install
+    - name: Build with Gradle
+      run: ./gradlew build
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -29,4 +29,4 @@ jobs:
         app-name: 'spring-ad-test'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_e032297279fc4904902db27dae179c4f }}
-        package: '${{ github.workspace }}/target/*.jar'
+        package: '${{ github.workspace }}/build/libs/*.jar'
